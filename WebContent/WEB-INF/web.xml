@@ -11,12 +11,12 @@
   </welcome-file-list>
   <servlet>
     <description></description>
-    <display-name>LoginControler</display-name>
-    <servlet-name>LoginControler</servlet-name>
-    <servlet-class>useJDBCToLogin.LoginControler</servlet-class>
+    <display-name>DoctorControler</display-name>
+    <servlet-name>DoctorControler</servlet-name>
+    <servlet-class>cn.nenu.controller.DoctorControler</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>LoginControler</servlet-name>
-    <url-pattern>/LoginControler</url-pattern>
+    <servlet-name>DoctorControler</servlet-name>
+    <url-pattern>/DoctorControler</url-pattern>
   </servlet-mapping>
 </web-app>

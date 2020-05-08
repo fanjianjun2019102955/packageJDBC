@@ -1,4 +1,4 @@
-package useJDBCToLogin;
+package cn.nenu.controller;
 
 import java.io.IOException;
 
@@ -7,24 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class LoginControler extends HttpServlet {
+import cn.nenu.dao.IDoctorDao;
+import cn.nenu.dao.Impl.DoctorDaoImpl;
+
+public class DoctorControler extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public LoginControler() {
-        super();
-    }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		LoginDao ld = new LoginDao();
+		IDoctorDao ld = new DoctorDaoImpl();
 		int loginStatu = ld.query(username, password);
 		String statu = "";
-		if (loginStatu == -1) {
-			statu = "系统异常！";
-			request.setAttribute("statu", statu);
-			request.getRequestDispatcher("systemError.jsp").forward(request, response);
-		}else if(loginStatu == 0) {
+		if (loginStatu == 0) {
 			statu = "用户名或密码错误，请重新登录！";
 			request.setAttribute("statu", statu);
 			request.getRequestDispatcher("loginError.jsp").forward(request, response);
