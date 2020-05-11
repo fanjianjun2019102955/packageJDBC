@@ -4,7 +4,7 @@
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>login.jsp</welcome-file>
     <welcome-file>default.html</welcome-file>
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
@@ -18,5 +18,35 @@
   <servlet-mapping>
     <servlet-name>DoctorControler</servlet-name>
     <url-pattern>/DoctorControler</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>pageController</display-name>
+    <servlet-name>pageController</servlet-name>
+    <servlet-class>cn.nenu.controller.pageController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>pageController</servlet-name>
+    <url-pattern>/pageController</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>deleteController</display-name>
+    <servlet-name>deleteController</servlet-name>
+    <servlet-class>cn.nenu.controller.deleteController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>deleteController</servlet-name>
+    <url-pattern>/deleteController</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>addController</display-name>
+    <servlet-name>addController</servlet-name>
+    <servlet-class>cn.nenu.controller.addController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>addController</servlet-name>
+    <url-pattern>/addController</url-pattern>
   </servlet-mapping>
 </web-app>

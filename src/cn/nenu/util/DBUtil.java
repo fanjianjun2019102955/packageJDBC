@@ -10,6 +10,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.sun.org.apache.regexp.internal.recompile;
+
 public class DBUtil {
 	// JDBC 加载的驱动类和连接字符串
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
@@ -125,6 +127,59 @@ public class DBUtil {
 		} catch (Exception e3) {
 			e3.printStackTrace();
 			return null;
+		} finally {
+			// 关闭资源,遵循先开后关原则。
+			try {
+				if (rs != null)
+					pstmt.close();
+			} catch (SQLException se1) {
+				se1.printStackTrace();
+			}
+			try {
+				if (pstmt != null)
+					pstmt.close();
+			} catch (SQLException se1) {
+				se1.printStackTrace();
+			}
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException se2) {
+				se2.printStackTrace();
+			}
+		}
+	}
+	
+	public static int queryCount(String sql) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int count = 0;
+		try {
+			// 1、加载驱动类
+			Class.forName(JDBC_DRIVER);
+
+			// 2、连接数据库
+			conn = DriverManager.getConnection(DB_URL, USER, PASS);
+			
+			// 3、创建Statement实例，执行查询语句
+			pstmt = conn.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			// 4、处理结果集
+			while (rs.next()) {
+				count =  rs.getInt(1);
+			}
+			return count;
+		} catch (ClassNotFoundException e1) {
+			e1.printStackTrace();
+			return 0;
+		} catch (SQLException e2) {
+			e2.printStackTrace();
+			return 0;
+		} catch (Exception e3) {
+			e3.printStackTrace();
+			return 0;
 		} finally {
 			// 关闭资源,遵循先开后关原则。
 			try {

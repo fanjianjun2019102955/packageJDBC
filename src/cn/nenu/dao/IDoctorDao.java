@@ -10,10 +10,14 @@ public interface IDoctorDao {
 
 	public List<Object> queryAll();
 
-	public boolean insert(int userID, String username, String password, int sex);
+	public boolean insert(Doctor doctor);
 
 	public boolean delete(int userID);
 
 	public boolean update(int userID, Doctor doctor);
+	
+	public List<Object> queryByPageNum(int startNum,int endNum);
+	
+	public int queryCountDoctor();
 
 }

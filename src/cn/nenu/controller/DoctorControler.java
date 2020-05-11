@@ -1,6 +1,7 @@
 package cn.nenu.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -26,7 +27,7 @@ public class DoctorControler extends HttpServlet {
 		}else {
 			statu = "登录成功！";
 			request.setAttribute("statu", statu);
-			request.getRequestDispatcher("loginSuccess.jsp").forward(request, response);
+			response.sendRedirect("pageController");
 		}
 		
 	}

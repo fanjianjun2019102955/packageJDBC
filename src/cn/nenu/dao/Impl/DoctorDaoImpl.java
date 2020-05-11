@@ -1,12 +1,17 @@
 package cn.nenu.dao.Impl;
 
+import static org.junit.Assert.fail;
+
 import java.util.List;
+
+import org.junit.Test;
 
 import cn.nenu.dao.IDoctorDao;
 import cn.nenu.entity.Doctor;
 import cn.nenu.util.DBUtil;
 
 public class DoctorDaoImpl implements IDoctorDao {
+	Doctor doctor = new Doctor();
 
 	@Override
 	public int query(String username, String password) {
@@ -26,10 +31,17 @@ public class DoctorDaoImpl implements IDoctorDao {
 	}
 
 	@Override
-	public boolean insert(int userID, String username, String password, int sex) {
-		String sql = "INSERT INTO doctor VALUES(?,?,?,?)";
-		Object[] param = {userID, username, password, sex};
-		return DBUtil.executeUpdate(sql, param);
+	public boolean insert(Doctor doctor) {
+		try {
+			String sql = "INSERT INTO doctor VALUES(?,?,?,?)";
+			Object[] param = {doctor.getUserID(), doctor.getUsername(), doctor.getPassword(), doctor.getSex()};
+			return DBUtil.executeUpdate(sql, param);			
+		} catch (NullPointerException e) {
+			String sql = "INSERT INTO doctor VALUES(?,?,?,?)";
+			Object[] param = {null, doctor.getUsername(), doctor.getPassword(), doctor.getSex()};
+			return DBUtil.executeUpdate(sql, param);			
+			// TODO: handle exception
+		}
 	}
 
 	@Override
@@ -45,5 +57,27 @@ public class DoctorDaoImpl implements IDoctorDao {
 		Object[] param = {doctor.getPassword(), doctor.getSex(), userID};
 		return DBUtil.executeUpdate(sql, param);
 	}
+
+	@Override
+	public List<Object> queryByPageNum(int startNum, int endNum) {
+		
+		String sql = "select * from doctor limit ?,?";
+		Object[] object = {startNum, endNum};
+		List<Object> doctors = DBUtil.executeQuery(sql, object, doctor);
+		return doctors;
+	}
+
+//	@Override
+//	public int queryCountDoctor() {
+//		String sql = "select * from doctor";
+//		List<Object> doctors = DBUtil.executeQuery(sql, null, doctor);
+//		return doctors.size();
+//	}
+	@Override
+	public int queryCountDoctor() {
+		String sql = "select count(*) from doctor";
+		return DBUtil.queryCount(sql);
+	}
+	
 
 }
